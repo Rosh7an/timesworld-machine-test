@@ -1,41 +1,63 @@
 import { useEffect, useState } from "react";
 import { Col, Row, Spinner, Tab, Tabs } from "react-bootstrap";
-import { Navigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import CountryList from "../components/CountryList";
 import Slider from "../components/Slider";
+import store from "../store.ts";
 
 export default function Home() {
   const location = useLocation();
-  if (location.state?.fromLogin !== true) {
-    return <Navigate to="/" replace />;
-  }
+  // if (location.state?.fromLogin !== true) {
+  //   return <Navigate to="/" replace />;
+  // }
 
-  return <WelcomePage />;
-}
-function WelcomePage() {
-  const [countries, setCountries] = useState([]);
-  const [region, setRegion] = useState("All");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [key, setKey] = useState("All");
+  const state = store.getState();
+
+  const countries = useSelector((state: any) => state.countries);
+  const region = useSelector((state: any) => state.region);
+  const loading = useSelector((state: any) => state.loading);
+  const error = useSelector((state: any) => state.error);
 
   useEffect(() => {
-    setLoading(true);
+    store.dispatch({ type: "SET_LOADING", loading: true });
     fetch(`https://restcountries.com/v2/all?fields=name,region,flag`)
       .then((response: any) => response.json())
       .then((data) => {
-        setCountries(data);
-        setLoading(false);
+        store.dispatch({ type: "SET_COUNTRIES", countries: data });
+        store.dispatch({ type: "SET_LOADING", loading: false });
       })
       .catch((error) => {
-        setError(error);
-        setLoading(false);
+        store.dispatch({ type: "SET_ERROR", error: error });
+        store.dispatch({ type: "SET_LOADING", loading: false });
       });
   }, []);
 
+  return !!state.loading ? (
+    <Spinner animation="border" />
+  ) : (
+    <WelcomePage
+      countries={countries}
+      region={region}
+      loading={loading}
+      error={error}
+    />
+  );
+}
+
+interface WelcomePageProps {
+  countries: any[];
+  region: string;
+  loading: boolean;
+  error: any;
+}
+
+function WelcomePage({ countries, region, loading, error }: WelcomePageProps) {
+  const [key, setKey] = useState("All");
+
   const handleRegionChange = (region: string | null) => {
     if (region !== null) {
-      setRegion(region);
+      store.dispatch({ type: "SET_REGION", region: region });
       setKey(region);
     }
   };
@@ -49,11 +71,9 @@ function WelcomePage() {
         <Col md={2}>
           <Tabs activeKey={key} onSelect={(k) => handleRegionChange(k)}>
             <Tab eventKey="All" title="All" />
-            {/* <Tab eventKey="Africa" title="Africa" /> */}
-            {/* <Tab eventKey="Americas" title="Americas" /> */}
+
             <Tab eventKey="Asia" title="Asia" />
             <Tab eventKey="Europe" title="Europe" />
-            {/* <Tab eventKey="Oceania" title="Oceania" /> */}
           </Tabs>
         </Col>
       </Row>
@@ -81,13 +101,6 @@ function WelcomePage() {
           <Row>
             <CountryList countries={countries} region={region} />
           </Row>
-          {/* <Row>
-            <Col md={12}>
-              <button onClick={() => handlePageChange(page + 1)}>
-                Load More
-              </button>
-            </Col>
-          </Row> */}
         </>
       )}
     </div>

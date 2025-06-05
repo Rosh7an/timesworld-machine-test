@@ -7,19 +7,6 @@ export default function Slider() {
       fade
       activeIndex={0}
       indicators={true}
-      className="custom-carousel"
-      // style={{
-      //   "& .carousel-indicators": {
-      //     width: "10px",
-      //     height: "10px",
-      //     borderRadius: "50%",
-      //     backgroundColor: "#ccc",
-      //     margin: "0 5px",
-      //   },
-      //   "& .carousel-indicators .active": {
-      //     backgroundColor: "#333",
-      //   },
-      // }}
     >
       <Carousel.Item>
         <India style={{ width: "100%" }} />

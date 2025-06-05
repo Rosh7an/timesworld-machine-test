@@ -7,6 +7,7 @@ import Slider from "../components/Slider";
 import store from "../store.ts";
 import './TabStyles.css'
 import StyledSpinner from "../components/StyledSpinner.tsx";
+import { API_URL } from "../constants.ts";
 
 export default function Home() {
   const location = useLocation();
@@ -25,7 +26,7 @@ function InitState() {
 
   useEffect(() => {
     store.dispatch({ type: "SET_LOADING", loading: true });
-    fetch(`https://restcountries.com/v2/all?fields=name,region,flag`)
+    fetch(API_URL)
       .then((response: any) => response.json())
       .then((data) => {
         store.dispatch({ type: "SET_COUNTRIES", countries: data });

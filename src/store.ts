@@ -1,7 +1,5 @@
-// store.ts
 import { legacy_createStore, combineReducers } from 'redux';
 
-// Define the initial state
 const initialState = {
   countries: [],
   region: 'All',
@@ -9,7 +7,6 @@ const initialState = {
   error: null,
 };
 
-// Define the reducers
 const countriesReducer = (state = initialState.countries, action: any) => {
   switch (action.type) {
     case 'SET_COUNTRIES':

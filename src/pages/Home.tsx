@@ -1,9 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Tabs, Tab, Spinner } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Col, Row, Spinner, Tab, Tabs } from "react-bootstrap";
+import { Navigate, useLocation } from "react-router-dom";
 import CountryList from "../components/CountryList";
 import Slider from "../components/Slider";
 
 export default function Home() {
+  const location = useLocation();
+  if (location.state?.fromLogin !== true) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <WelcomePage />;
+}
+function WelcomePage() {
   const [countries, setCountries] = useState([]);
   const [region, setRegion] = useState("All");
   const [loading, setLoading] = useState(false);
@@ -31,10 +40,8 @@ export default function Home() {
     }
   };
 
-
-
   return (
-    <div style={{marginTop:"2%"}}>
+    <div style={{ marginTop: "2%" }}>
       <Row className="mx-5">
         <Col md={10}>
           <h2>Countries</h2>
@@ -72,7 +79,7 @@ export default function Home() {
       ) : (
         <>
           <Row>
-            <CountryList countries={countries} region={region}/>
+            <CountryList countries={countries} region={region} />
           </Row>
           {/* <Row>
             <Col md={12}>

@@ -1,4 +1,3 @@
-// Login.tsx
 import React, { useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -35,10 +34,9 @@ export default function Login() {
     event.preventDefault();
     if (!validateForm()) {
       try {
-        navigate("/home");
+        navigate("/home", { state: { fromLogin: true } });
       } catch (error) {
-        console.error("Error submitting form:", error);
-        setErrors({ submit: "Error submitting form" });
+        console.error(error);
       }
     }
   };

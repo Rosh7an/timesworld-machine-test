@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Col, Row, Tab, Tabs } from "react-bootstrap";
+import { Col, Row, Spinner, Tab, Tabs } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import CountryList from "../components/CountryList";
 import Slider from "../components/Slider";
-import CenterSpinner from "../components/StyledSpinner.tsx";
 import store from "../store.ts";
 import './TabStyles.css'
+import StyledSpinner from "../components/StyledSpinner.tsx";
 
 export default function Home() {
   const location = useLocation();
@@ -38,7 +38,7 @@ function InitState() {
   }, []);
 
   return !!state.loading ? (
-    <CenterSpinner />
+    <StyledSpinner />
   ) : (
     <WelcomePage
       countries={countries}
@@ -100,7 +100,7 @@ function WelcomePage({ countries, region, loading, error }: WelcomePageProps) {
         </Col>
       </Row>
       {loading ? (
-        <CenterSpinner />
+        <Spinner />
       ) : (
         <>
           <Row>

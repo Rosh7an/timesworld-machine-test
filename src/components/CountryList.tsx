@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import {
+  Button,
   Card,
   Col,
   Container,
   Row
 } from "react-bootstrap";
-import StyledButton from "./StyledButton";
 
 interface Country {
   name: string;
@@ -48,7 +48,7 @@ useEffect(() => {
           </div>
         ))}
       </Row>
-      <StyledButton onClick={() => handlePageChange(countriesPerPage + 10)} style={{ textAlign: "center", margin: "20px 0" }} title="Load More" />
+      <Button variant="dark" onClick={() => handlePageChange(countriesPerPage + 10)}>Load More</Button>
     </Container>
   );
 };

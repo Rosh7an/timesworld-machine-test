@@ -1,4 +1,3 @@
-import StyledButton from "../components/StyledButton";
 import React, { useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -45,40 +44,19 @@ export default function Login() {
           md={6}
           className="d-flex justify-content-center align-items-center"
         >
-          <Card
-            style={{
-              width: "100%",
-              maxWidth: "400px",
-              border: "none",
-              display: "flex",
-              alignItems: "start",
-            }}
-          >
-            <Card.Body style={{ width: "100%" }}>
-              <h2 style={{ marginBottom: "20px",fontFamily:"sans-serif",fontWeight:"700" }}>Sign In</h2>
+          <Card className="w-100 border-0" style={{ maxWidth: "400px" }}>
+            <Card.Body className="w-100">
+            <h2 className="mb-4 fw-bold font-sans text-start">Sign In</h2>
 
               {/* New User link */}
-              <div className="text-center mb-3">
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 6,
-                  }}
+              <div className="mb-3 d-flex align-items-center gap-2">
+                <span className="fw-semibold fs-5">New User?</span>
+                <span
+                  className="fs-6 text-primary"
+                  style={{ cursor: "pointer" }}
                 >
-                  <span style={{ fontSize: 18, fontWeight: 600 }}>
-                    New User?
-                  </span>
-                  <span
-                    style={{
-                      fontSize: 14,
-                      color: "blue",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Create an account
-                  </span>
-                </div>
+                  Create an account
+                </span>
               </div>
 
               {/* Sign-in form */}
@@ -87,7 +65,7 @@ export default function Login() {
                   <Form.Control
                     type="email"
                     placeholder="Username or email"
-                    style={{fontWeight:500}}
+                    className="fw-medium"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
@@ -102,7 +80,7 @@ export default function Login() {
                   <Form.Control
                     type="password"
                     placeholder="Password"
-                    style={{fontWeight:500}}
+                    className="fw-medium"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -123,31 +101,16 @@ export default function Login() {
 
                 {/* Sign-in button */}
                 <div className="d-grid mt-4">
-                  <StyledButton
-                    variant="primary"
-                    type="submit"
-                    title="Sign In"
-                    style={{ width: "100%" }}
-                  />
+                  <Button variant="dark">Sign In</Button>
                 </div>
               </Form>
 
               <div className="d-flex align-items-center my-4">
-                <div
-                  style={{ flex: 1, height: "1px", backgroundColor: "#ccc" }}
-                ></div>
-                <div
-                  style={{
-                    margin: "0 15px",
-                    color: "#888",
-                    whiteSpace: "nowrap",
-                  }}
-                >
+                <div className="flex-grow-1 border-top border-secondary-subtle"></div>
+                <div className="mx-3 text-muted text-nowrap">
                   or sign in with
                 </div>
-                <div
-                  style={{ flex: 1, height: "1px", backgroundColor: "#ccc" }}
-                ></div>
+                <div className="flex-grow-1 border-top border-secondary-subtle"></div>
               </div>
 
               {/* Social Login Icons */}

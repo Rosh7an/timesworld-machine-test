@@ -1,14 +1,9 @@
-import { Spinner } from "react-bootstrap"
+import { Spinner } from "react-bootstrap";
 
-export default function CenterSpinner(){
-    return    (<div
-    style={{
-      height: "100vh",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    }}
-  >
-    <Spinner animation="border" />
-  </div>)
+export default function StyledSpinner() {
+  return (
+    <div className="d-flex justify-content-center align-items-center vh-100">
+      <Spinner animation="border" />
+    </div>
+  );
 }

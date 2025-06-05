@@ -8,7 +8,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/" element={<Login onSubmit={(username, password) => console.log(username, password)}/>} />
+        <Route path="/" element={<Login/>} />
       </Routes>
     </BrowserRouter>
   );

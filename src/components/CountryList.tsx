@@ -5,6 +5,7 @@ import {
   Container,
   Row
 } from "react-bootstrap";
+import StyledButton from "./StyledButton";
 
 interface Country {
   name: string;
@@ -47,9 +48,7 @@ useEffect(() => {
           </div>
         ))}
       </Row>
-      <button onClick={() => handlePageChange(countriesPerPage + 10)}>
-        Load More
-      </button>
+      <StyledButton onClick={() => handlePageChange(countriesPerPage + 10)} />
     </Container>
   );
 };

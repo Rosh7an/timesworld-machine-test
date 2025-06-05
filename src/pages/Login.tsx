@@ -1,6 +1,8 @@
+import StyledButton from "../components/StyledButton";
 import React, { useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import './LoginStyles.css';
 
 
 export default function Login() {
@@ -73,9 +75,9 @@ export default function Login() {
                     />
                     {errors && (errors as any).password && <Form.Text className="text-danger">{(errors as any).password}</Form.Text>}
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <StyledButton variant="primary" type="submit">
                   Login
-                </Button>
+                </StyledButton>
               </Form>
             </Card.Body>
           </Card>

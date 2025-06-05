@@ -5,6 +5,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import CountryList from "../components/CountryList";
 import Slider from "../components/Slider";
 import store from "../store.ts";
+import CenterSpinner from "../components/StyledSpinner.tsx";
 
 export default function Home() {
   const location = useLocation();
@@ -36,7 +37,7 @@ function InitState() {
   }, []);
 
   return !!state.loading ? (
-    <Spinner animation="border" />
+    <CenterSpinner />
   ) : (
     <WelcomePage
       countries={countries}
@@ -97,7 +98,7 @@ function WelcomePage({ countries, region, loading, error }: WelcomePageProps) {
         </Col>
       </Row>
       {loading ? (
-        <Spinner></Spinner>
+        <CenterSpinner />
       ) : (
         <>
           <Row>

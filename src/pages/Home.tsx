@@ -6,7 +6,6 @@ import Slider from "../components/Slider";
 export default function Home() {
   const [countries, setCountries] = useState([]);
   const [region, setRegion] = useState("All");
-  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [key, setKey] = useState("All");
@@ -23,7 +22,7 @@ export default function Home() {
         setError(error);
         setLoading(false);
       });
-  }, [page]);
+  }, []);
 
   const handleRegionChange = (region: string | null) => {
     if (region !== null) {
@@ -32,9 +31,7 @@ export default function Home() {
     }
   };
 
-  const handlePageChange = (page: number) => {
-    setPage(page);
-  };
+
 
   return (
     <div style={{marginTop:"2%"}}>
@@ -75,15 +72,15 @@ export default function Home() {
       ) : (
         <>
           <Row>
-            <CountryList countries={countries} region={region} />
+            <CountryList countries={countries} region={region}/>
           </Row>
-          <Row>
+          {/* <Row>
             <Col md={12}>
               <button onClick={() => handlePageChange(page + 1)}>
                 Load More
               </button>
             </Col>
-          </Row>
+          </Row> */}
         </>
       )}
     </div>

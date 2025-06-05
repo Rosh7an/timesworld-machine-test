@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { Col, Row, Spinner, Tab, Tabs } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
-import CountryList from "../components/CountryList";
-import Slider from "../components/Slider";
-import store from "../store.ts";
+import CountryList from "../../components/CountryList.tsx";
+import Slider from "../../components/Slider.tsx";
+import store from "../../store.ts";
 import './TabStyles.css'
-import StyledSpinner from "../components/StyledSpinner.tsx";
-import { API_URL } from "../constants.ts";
+import StyledSpinner from "../../components/StyledSpinner.tsx";
+import { API_URL } from "../../constants.ts";
 
 export default function Home() {
   const location = useLocation();

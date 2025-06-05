@@ -48,7 +48,7 @@ useEffect(() => {
           </div>
         ))}
       </Row>
-      <StyledButton onClick={() => handlePageChange(countriesPerPage + 10)} />
+      <StyledButton onClick={() => handlePageChange(countriesPerPage + 10)} style={{ textAlign: "center", margin: "20px 0" }} title="Load More" />
     </Container>
   );
 };

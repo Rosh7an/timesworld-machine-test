@@ -1,0 +1,13 @@
+.custom-tabs.nav-tabs{
+  font-weight: 500;
+    border: none;
+    .nav-link{
+    color: #73706a;
+    border: none;
+    }
+    .nav-link.active{
+      border:none;
+      border-bottom: 2px solid black;
+    }
+  }
+  

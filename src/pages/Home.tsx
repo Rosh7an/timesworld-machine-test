@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Col, Row, Spinner, Tab, Tabs } from "react-bootstrap";
+import { Col, Row, Tab, Tabs } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Navigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import CountryList from "../components/CountryList";
 import Slider from "../components/Slider";
-import store from "../store.ts";
 import CenterSpinner from "../components/StyledSpinner.tsx";
+import store from "../store.ts";
+import './TabStyles.css'
 
 export default function Home() {
   const location = useLocation();
@@ -72,7 +73,7 @@ function WelcomePage({ countries, region, loading, error }: WelcomePageProps) {
           <h2>Countries</h2>
         </Col>
         <Col md={2}>
-          <Tabs activeKey={key} onSelect={(k) => handleRegionChange(k)}>
+          <Tabs activeKey={key} onSelect={(k) => handleRegionChange(k)} className="custom-tabs">
             <Tab eventKey="All" title="All" />
 
             <Tab eventKey="Asia" title="Asia" />
@@ -94,7 +95,8 @@ function WelcomePage({ countries, region, loading, error }: WelcomePageProps) {
           <Slider />
         </Col>
         <Col md={2}>
-          <Slider />
+          <img src="https://rankingroyals.com/wp-content/uploads/2023/03/Happiest-Countries-inforgraphics-2023.png" width="100%" height="100%" style={{display:"flex"}}/>
+          {/* <Slider /> */}
         </Col>
       </Row>
       {loading ? (

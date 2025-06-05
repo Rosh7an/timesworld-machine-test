@@ -10,7 +10,14 @@ export default function Login() {
 
   const validateForm = () => {
     const errors: any = {};
-    if (!username) errors.username = "Username is required";
+    if (!username) {
+      errors.username = "Username is required";
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+$/;
+      if (!emailRegex.test(username)) {
+        errors.username = "Invalid email format";
+      }
+    }
     const passwordErrors = [];
 
     if (password.length < 8) passwordErrors.push("at least 8 characters long");
@@ -46,9 +53,8 @@ export default function Login() {
         >
           <Card className="w-100 border-0" style={{ maxWidth: "400px" }}>
             <Card.Body className="w-100">
-            <h2 className="mb-4 fw-bold font-sans text-start">Sign In</h2>
+              <h2 className="mb-4 fw-bold font-sans text-start">Sign In</h2>
 
-              {/* New User link */}
               <div className="mb-3 d-flex align-items-center gap-2">
                 <span className="fw-semibold fs-5">New User?</span>
                 <span
@@ -59,7 +65,6 @@ export default function Login() {
                 </span>
               </div>
 
-              {/* Sign-in form */}
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="email">
                   <Form.Control
@@ -91,7 +96,6 @@ export default function Login() {
                   )}
                 </Form.Group>
 
-                {/* Keep me signed in */}
                 <div className="d-flex align-items-center mt-3">
                   <input type="checkbox" id="keep-signed-in" />
                   <label htmlFor="keep-signed-in" className="ms-2 mb-0">
@@ -99,9 +103,10 @@ export default function Login() {
                   </label>
                 </div>
 
-                {/* Sign-in button */}
                 <div className="d-grid mt-4">
-                  <Button variant="dark">Sign In</Button>
+                  <Button variant="dark" onClick={(e: any) => handleSubmit(e)}>
+                    Sign In
+                  </Button>
                 </div>
               </Form>
 
@@ -113,34 +118,33 @@ export default function Login() {
                 <div className="flex-grow-1 border-top border-secondary-subtle"></div>
               </div>
 
-              {/* Social Login Icons */}
               <div className="d-flex justify-content-center gap-5 mb-2">
                 <img
-                  src="https://cdn-icons-png.flaticon.com/512/281/281764.png"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiJPnmAo10Myt18wHbOBNdhnWTl7-YbOhPZw&s"
                   alt="Google"
-                  width={30}
-                  height={30}
+                  width={35}
+                  height={35}
                   style={{ cursor: "pointer" }}
                 />
                 <img
-                  src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
+                  src="https://static.vecteezy.com/system/resources/thumbnails/053/408/038/small/facebook-icon-with-round-line-and-transparent-background-free-png.png"
                   alt="Facebook"
-                  width={30}
-                  height={30}
+                  width={35}
+                  height={35}
                   style={{ cursor: "pointer" }}
                 />
                 <img
-                  src="https://cdn-icons-png.flaticon.com/512/145/145807.png"
+                  src="https://static.vecteezy.com/system/resources/previews/018/930/482/non_2x/linkedin-logo-linkedin-icon-transparent-free-png.png"
                   alt="LinkedIn"
-                  width={30}
-                  height={30}
+                  width={35}
+                  height={35}
                   style={{ cursor: "pointer" }}
                 />
                 <img
-                  src="https://cdn-icons-png.flaticon.com/512/733/733579.png"
+                  src="https://www.freeiconspng.com/uploads/black-lines-twitter-icon-symbol-18.png"
                   alt="Twitter"
-                  width={30}
-                  height={30}
+                  width={35}
+                  height={35}
                   style={{ cursor: "pointer" }}
                 />
               </div>
@@ -151,12 +155,13 @@ export default function Login() {
         {/* Right-side image */}
         <Col
           md={6}
-          className="d-flex justify-content-center align-items-center"
+          className="d-none d-md-flex justify-content-center align-items-center"
+          style={{ height: "100vh" }}
         >
           <img
-            src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?semt=ais_items_boosted&w=740"
+            src="sign-in.png"
             alt="Background"
-            className="img-fluid"
+            style={{ maxHeight: '60%', width: '100%', objectFit: 'contain', marginBottom:'15%' }}
           />
         </Col>
       </Row>

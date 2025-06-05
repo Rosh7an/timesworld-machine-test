@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { Col, Row, Spinner, Tab, Tabs } from "react-bootstrap";
+import { useEffect } from "react";
+import { Col, Container, Row, Spinner, Tab, Tabs } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import CountryList from "../../components/CountryList.tsx";
 import Slider from "../../components/Slider.tsx";
-import store from "../../store.ts";
-import './TabStyles.css'
 import StyledSpinner from "../../components/StyledSpinner.tsx";
 import { API_URL } from "../../constants.ts";
+import store from "../../store.ts";
+import "./TabStyles.css";
 
 export default function Home() {
   const location = useLocation();
@@ -58,57 +58,49 @@ interface WelcomePageProps {
 }
 
 function WelcomePage({ countries, region, loading, error }: WelcomePageProps) {
-  const [key, setKey] = useState("All");
 
   const handleRegionChange = (region: string | null) => {
     if (region !== null) {
       store.dispatch({ type: "SET_REGION", region: region });
-      setKey(region);
     }
   };
 
   return (
-    <div style={{ marginTop: "2%" }}>
-      <Row className="mx-5">
-        <Col md={10}>
-          <h2>Countries</h2>
+    <Container className="px-4 mt-3">
+      <Row className="d-flex justify-content-between align-items-center mb-3">
+        <Col xs="auto">
+          <h4>Countries</h4>
         </Col>
-        <Col md={2}>
-          <Tabs activeKey={key} onSelect={(k) => handleRegionChange(k)} className="custom-tabs">
-            <Tab eventKey="All" title="All" />
-
-            <Tab eventKey="Asia" title="Asia" />
-            <Tab eventKey="Europe" title="Europe" />
+        <Col xs="auto">
+          <Tabs
+            activeKey={region}
+            onSelect={(k) => handleRegionChange(k || "All")}
+            className="custom-tabs"
+          >
+            {["All", "Asia", "Europe"].map((r) => (
+              <Tab key={r} eventKey={r} title={r} />
+            ))}
           </Tabs>
         </Col>
       </Row>
 
       <Row className="my-5">
         <div className="d-flex justify-content-center">
-          <div className="w-100 border-top border-dark my-2 mx-5"></div>
+          <div className="w-100 border-top border-2 border-dark mx-3"></div>
           <h1 className="my-0">WELCOME</h1>
-          <div className="w-100 border-bottom border-dark my-2 mx-5"></div>
+          <div className="w-100 border-bottom border-2 border-dark mx-3"></div>
         </div>
       </Row>
 
-      <Row className="my-5">
-        <Col md={9}>
-          <Slider />
-        </Col>
-        <Col md={2}>
-          <img src="https://rankingroyals.com/wp-content/uploads/2023/03/Happiest-Countries-inforgraphics-2023.png" width="100%" height="100%" style={{display:"flex"}}/>
-          {/* <Slider /> */}
-        </Col>
-      </Row>
+      <Slider />
+
       {loading ? (
-        <Spinner />
+        <div className="text-center my-4">
+          <Spinner animation="border" />
+        </div>
       ) : (
-        <>
-          <Row>
-            <CountryList countries={countries} region={region} />
-          </Row>
-        </>
+        <CountryList countries={countries} region={region} />
       )}
-    </div>
+    </Container>
   );
 }

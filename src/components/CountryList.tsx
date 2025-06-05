@@ -39,56 +39,44 @@ useEffect(() => {
     setCountriesPerPage(pageNumber);
   };
 
+
   return (
-    <Container style={{ paddingLeft: "5%" }}>
+    <Container>
       <Row>
-        {displayedCountries.map((country, index) => (
-          <div key={index} className="col-md-6">
+        {displayedCountries.map((country, idx) => (
+          <Col xs={12} sm={6} md={6} lg={6} key={idx}>
             <CountryCard {...country} />
-          </div>
+          </Col>
         ))}
       </Row>
-      <Button variant="dark" onClick={() => handlePageChange(countriesPerPage + 10)}>Load More</Button>
+              <div className="text-center my-3">
+                <Button variant="dark" onClick={() => handlePageChange(countriesPerPage + 10)}>
+                  Load more
+                </Button>
+              </div>      
     </Container>
   );
 };
 
 export default CountryList;
 
-function CountryCard(country: Country) {
+function CountryCard({ name, region, flag }: Country) {
   return (
-    <Card
-      style={{
-        height: "150px",
-        width: "85%",
-        display: "flex",
-        justifyContent: "center",
-        marginBottom: "2%",
-        border: "1px solid black",
-      }}
-    >
-      <Row
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Col md={4} style={{ paddingLeft: "2%" }}>
+    <Card className="mb-3 shadow-sm border-dark w-100">
+      <Row className="g-0 align-items-center">
+        <Col xs={4}>
           <img
-            src={country.flag}
-            alt={country.name}
-            style={{
-              width: "200px",
-              height: "140px",
-              borderRadius: "10px",
-              objectFit: "cover",
-            }}
+            src={flag}
+            alt={name}
+            className="img-fluid rounded-start"
+            style={{ height: "80px", objectFit: "cover" }}
           />
         </Col>
-        <Col md={8}>
-          <h2>{country.name}</h2>
-          <p>{country.region}</p>
+        <Col xs={8}>
+          <Card.Body className="py-2">
+            <Card.Title className="mb-1">{name}</Card.Title>
+            <Card.Text className="text-muted small">{region}</Card.Text>
+          </Card.Body>
         </Col>
       </Row>
     </Card>

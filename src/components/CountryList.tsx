@@ -1,11 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Row
-} from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 
 interface Country {
   name: string;
@@ -21,24 +15,26 @@ interface CountryListProps {
 const CountryList = ({ countries, region }: CountryListProps) => {
   const [countriesPerPage, setCountriesPerPage] = useState(10);
   const [displayedCountries, setDisplayedCountries] = useState<Country[]>([]);
-const filteredCountries = useMemo(
-  () => (region === "All" ? countries : countries.filter((country) => country?.region === region)),
-  [countries, region]
-);
+  const filteredCountries = useMemo(
+    () =>
+      region === "All"
+        ? countries
+        : countries.filter((country) => country?.region === region),
+    [countries, region]
+  );
 
- useMemo(
-  () => setDisplayedCountries(filteredCountries.slice(0, countriesPerPage)),
-  [filteredCountries, countriesPerPage]
-);
+  useMemo(
+    () => setDisplayedCountries(filteredCountries.slice(0, countriesPerPage)),
+    [filteredCountries, countriesPerPage]
+  );
 
-useEffect(() => {
-  setCountriesPerPage(10);
-}, [region]);
+  useEffect(() => {
+    setCountriesPerPage(10);
+  }, [region]);
 
   const handlePageChange = (pageNumber: number) => {
     setCountriesPerPage(pageNumber);
   };
-
 
   return (
     <Container>
@@ -49,11 +45,14 @@ useEffect(() => {
           </Col>
         ))}
       </Row>
-              <div className="text-center my-3">
-                <Button variant="dark" onClick={() => handlePageChange(countriesPerPage + 10)}>
-                  Load more
-                </Button>
-              </div>      
+      <div className="text-center my-3">
+        <Button
+          variant="dark"
+          onClick={() => handlePageChange(countriesPerPage + 10)}
+        >
+          Load more
+        </Button>
+      </div>
     </Container>
   );
 };
@@ -69,7 +68,7 @@ function CountryCard({ name, region, flag }: Country) {
             src={flag}
             alt={name}
             className="img-fluid rounded-start"
-            style={{ height: "80px", objectFit: "cover" }}
+            style={{ height: "80px", width: "80%", objectFit: "cover" }}
           />
         </Col>
         <Col xs={8}>

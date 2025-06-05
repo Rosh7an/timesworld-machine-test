@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Col, Row, Tab, Tabs } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import CountryList from "../components/CountryList";
 import Slider from "../components/Slider";
 import CenterSpinner from "../components/StyledSpinner.tsx";
@@ -10,9 +10,9 @@ import './TabStyles.css'
 
 export default function Home() {
   const location = useLocation();
-  // if (location.state?.fromLogin !== true) {
-  //   return <Navigate to="/" replace />;
-  // }
+  if (location.state?.fromLogin !== true) {
+    return <Navigate to="/" replace />;
+  }
   return <InitState />;
 }
 function InitState() {

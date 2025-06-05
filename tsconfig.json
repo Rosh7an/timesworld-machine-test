@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ES6"],
+    "jsx": "react-jsx",
+
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+
+    "outDir": "dist",          // ✅ Compiled output goes to 'dist'
+    "noEmit": true,            // ✅ Prevent TypeScript from writing files (good for CRA)
+    "allowJs": true,           // Allows JS files if needed
+    "checkJs": false           // Optional: don't type-check .js files
+  },
+  "include": ["src","index.tsx"],
+  "exclude": ["node_modules", "dist"]
+}

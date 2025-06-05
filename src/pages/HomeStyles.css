@@ -1,0 +1,22 @@
+.slider-container {
+    position: relative;
+  }
+  
+  .slider-1 {
+    position: absolute;
+    top: 66.67%; /* 2/3 of the screen height */
+  }
+  
+  .slider-2 {
+    position: absolute;
+    top: 33.33%; /* 1/3 of the screen height */
+  }
+  
+  @media (max-width: 768px) {
+    .slider-1, .slider-2 {
+      position: static;
+    }
+    .slider-2 {
+      margin-top: 20px; /* add some margin to separate the sliders on mobile */
+    }
+  }

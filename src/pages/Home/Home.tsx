@@ -1,5 +1,12 @@
-import { useEffect } from "react";
-import { Col, Container, Row, Spinner, Tab, Tabs } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import {
+  Col,
+  Container,
+  Row,
+  Spinner,
+  Tab,
+  Tabs
+} from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import CountryList from "../../components/CountryList.tsx";
@@ -58,12 +65,14 @@ interface WelcomePageProps {
 }
 
 function WelcomePage({ countries, region, loading, error }: WelcomePageProps) {
-
   const handleRegionChange = (region: string | null) => {
     if (region !== null) {
       store.dispatch({ type: "SET_REGION", region: region });
     }
   };
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const regions = ["All", "Asia", "Europe"];
 
   return (
     <Container className="px-4 mt-3">
@@ -85,11 +94,21 @@ function WelcomePage({ countries, region, loading, error }: WelcomePageProps) {
       </Row>
 
       <Row className="my-5">
-        <div className="d-flex justify-content-center">
-          <div className="w-100 border-top border-2 border-dark mx-3"></div>
-          <h1 className="my-0">WELCOME</h1>
-          <div className="w-100 border-bottom border-2 border-dark mx-3"></div>
-        </div>
+        <Col className="text-center">
+          {/* Mobile view: Top & Bottom divider with WELCOME in between */}
+          <div className="d-block d-md-none">
+            <div className="border-top border-2 border-dark my-3"></div>
+            <h1 className="my-0">WELCOME</h1>
+            <div className="border-bottom border-2 border-dark my-3"></div>
+          </div>
+
+          {/* Desktop/Tablet view: WELCOME inline with dividers */}
+          <div className="d-none d-md-flex justify-content-center">
+            <div className="w-100 border-top border-2 border-dark mx-3"></div>
+            <h1 className="my-0">WELCOME</h1>
+            <div className="w-100 border-bottom border-2 border-dark mx-3"></div>
+          </div>
+        </Col>
       </Row>
 
       <Slider />

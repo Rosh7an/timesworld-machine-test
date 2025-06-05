@@ -9,9 +9,9 @@ import CenterSpinner from "../components/StyledSpinner.tsx";
 
 export default function Home() {
   const location = useLocation();
-  if (location.state?.fromLogin !== true) {
-    return <Navigate to="/" replace />;
-  }
+  // if (location.state?.fromLogin !== true) {
+  //   return <Navigate to="/" replace />;
+  // }
   return <InitState />;
 }
 function InitState() {
